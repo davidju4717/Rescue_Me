@@ -8,18 +8,18 @@ class MyApp extends StatelessWidget {
 
   static final Map<String, Widget Function(BuildContext)> routes = {
     WasteListScreen.routeName: (context) => WasteListScreen(),
-    NewWasteEntry.routeName: (context) => NewWasteEntry(),
   };
 
 
-   @override
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      routes: MyApp.routes,
+      home: WasteListScreen(),
+      // routes: MyApp.routes,
     );
   }
 }

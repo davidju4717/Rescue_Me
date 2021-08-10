@@ -23,7 +23,7 @@ class WasteDetail extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
               Text(post['uri'],
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30)),
-              Text(post['wasted_items'].toString(),
+              Text('Items: ${post['wasted_items'].toString()}',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
               Text('Location(${post['latitude'].toString()},${post['longitude'].toString()})',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)), 
