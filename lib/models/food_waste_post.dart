@@ -15,6 +15,7 @@ class FoodWastePost {
   String get getUrl => url;
   double? get getLatitude => latitude;
   double? get getLongitude => longitude;
+  DateTime get getDatetime => submittedDate;
   Timestamp get getDateTimeStamp => Timestamp.fromDate(submittedDate);
   int get getWastedItems => wastedItems;
 }
