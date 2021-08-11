@@ -20,6 +20,7 @@ class WasteListScreen extends StatefulWidget {
 class _WasteListScreenState extends State<WasteListScreen> {
   File? image;
   final picker = ImagePicker();
+  num sum = 0;
 
   Future getImage() async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
@@ -29,9 +30,38 @@ class _WasteListScreenState extends State<WasteListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    return StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection('posts')
+            .orderBy('date', descending: true)
+            .snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasData &&
+              snapshot.data!.docs != null &&
+              snapshot.data!.docs.length > 0) {
+            sum = 0;
+            for (var index = 0; index < snapshot.data!.docs.length; index++) {
+              var post = snapshot.data!.docs[index];
+              sum += post['quantity'];
+            }
+            return listScaffold(
+              context: context, 
+              sum: sum, 
+              // body: wasteList());
+              body:WasteList(snapshot: snapshot));
+          } else {
+            return listScaffold(
+              context: context, 
+              sum: sum, 
+              body: Center(child: CircularProgressIndicator()));
+          }
+        });
+  }
+
+  Widget listScaffold({required BuildContext context, required num sum, required Widget body}) {
     return Scaffold(
-        appBar: AppBar(title: Text('Wasteagram')),
-        body: wasteList(),
+        appBar: AppBar(title: Text('Wasteagram-$sum')),
+        body: body,
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: Semantics(
           child: FloatingActionButton(
@@ -42,6 +72,7 @@ class _WasteListScreenState extends State<WasteListScreen> {
           button: true,
           enabled: true,
           onTapHint: 'Select an image',
+          label: 'Press to select an image'
         ));
   }
 

@@ -58,7 +58,7 @@ class _NewWasteEntryState extends State<NewWasteEntry> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Wasteagram'),
+          title: Text('New Post'),
         ),
         body: Padding(
             padding: const EdgeInsets.all(20),
@@ -71,22 +71,25 @@ class _NewWasteEntryState extends State<NewWasteEntry> {
                       flex: 5,
                       child: Image.file(widget.image!),
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: 20),
                     Flexible(
                       flex: 1,
                       child: wastedItemField(),
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: 20),
                     Flexible(
-                      flex: 1,
-                      child: submitButton(context),
-                    ),
+                        flex: 1,
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: submitButton(context),
+                        )),
                   ],
                 ))));
   }
 
   Widget wastedItemField() {
-    return TextFormField(
+    return Semantics(
+      child: TextFormField(
         keyboardType: TextInputType.numberWithOptions(),
         inputFormatters: <TextInputFormatter>[
           FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
@@ -103,35 +106,47 @@ class _NewWasteEntryState extends State<NewWasteEntry> {
           } else {
             return null;
           }
-        });
+        }
+      ),
+      onTapHint: 'Introduce number of wasted items',
+      label: 'Introduce number of wasted items'
+    );
   }
 
   Widget submitButton(BuildContext context) {
-    return ElevatedButton(
-        child: Text('Upload'),
-        onPressed: () async {
-          if (formKey.currentState!.validate()) {
-            formKey.currentState!.save();
-            DateTime date = DateTime.now();
-            foodWastePost.submittedDate = date;
-            foodWastePost.latitude = locationData!.latitude;
-            foodWastePost.longitude = locationData!.longitude;
-            final url = await getImageUrl();
-            foodWastePost.url = url;
-            print(foodWastePost.toString());
+    return Semantics(
+      child: ElevatedButton(
+          child: const Icon(Icons.cloud_upload, size: 50),
+          onPressed: () async {
+            if (formKey.currentState!.validate()) {
+              formKey.currentState!.save();
 
-            // upload data to firebasee
-            FirebaseFirestore.instance
-              .collection('posts')
-              .add(
-                {'submitted_date': Timestamp.fromDate(foodWastePost.submittedDate),
-                 'latitude': foodWastePost.latitude,
-                 'longitude': foodWastePost.longitude,
-                 'wasted_items': foodWastePost.wastedItems,
-                 'url': foodWastePost.url});
-            Navigator.of(context).pop();
-          }
-        });
+              // get date, latitude and longitude
+              DateTime date = DateTime.now();
+              foodWastePost.submittedDate = date;
+              foodWastePost.latitude = locationData!.latitude;
+              foodWastePost.longitude = locationData!.longitude;
+
+              // get url of the image
+              final url = await getImageUrl();
+              foodWastePost.url = url;
+
+              // upload data to firebasee
+              FirebaseFirestore.instance.collection('posts').add({
+                'date': foodWastePost.getDateTimeStamp,
+                'latitude': foodWastePost.getLatitude,
+                'longitude': foodWastePost.getLongitude,
+                'quantity': foodWastePost.getWastedItems,
+                'imageURL': foodWastePost.getUrl
+              });
+              Navigator.of(context).pop();
+            }
+          }),
+      button: true,
+      enabled: true,
+      onTapHint: 'Upload the post',
+      label: 'Press to upload the post',
+    );
   }
 
   Future getImageUrl() async {

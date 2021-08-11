@@ -1,30 +1,31 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility that Flutter provides. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
-
-import 'package:wasteagram/main.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:test/test.dart';
+import 'package:wasteagram/models/food_waste_post.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp());
+  test('check if latitude getter returns appropiate value', () {
+    final post = FoodWastePost();
+    post.wastedItems = 3;
+    post.latitude = 50.0;
+    post.longitude = -50.0;
+    post.submittedDate = DateTime.now();
+    post.url = 'hello';
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    final latitude = post.getLatitude;
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    expect(latitude, 50.0);
+  });
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+  test('check if getter getDateTimeStamp converts and returns the date in type Timestamp instead of DateTime', () {
+    final post = FoodWastePost();
+    post.wastedItems = 3;
+    post.latitude = 50.0;
+    post.longitude = -50.0;
+    post.submittedDate = DateTime.now();
+    post.url = 'hello';
+
+    final dateTimeStamp = post.getDateTimeStamp;
+
+    expect(dateTimeStamp.runtimeType, Timestamp);
   });
 }
