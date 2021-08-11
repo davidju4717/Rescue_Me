@@ -5,7 +5,10 @@ import '../screens/waste_detail_screen.dart';
 
 Widget wasteList() {
   return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection('posts').snapshots(),
+      stream: FirebaseFirestore.instance
+        .collection('posts')
+        .orderBy('submitted_date', descending: true)
+        .snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasData &&
             snapshot.data!.docs != null &&
@@ -16,8 +19,11 @@ Widget wasteList() {
                 var post = snapshot.data!.docs[index];
                 return ListTile(
                     title: Text(
-                        '${DateFormat('EEEE, d MMM, yyyy').format(post['submitted_date'].toDate())}'),
-                    trailing: Text(post['wasted_items'].toString()),
+                        '${DateFormat('EEEE, d MMM, yyyy').format(post['submitted_date'].toDate())}',
+                        style: TextStyle(fontSize: 20)),
+                    trailing: Text(
+                      post['wasted_items'].toString(),
+                      style: TextStyle(fontSize: 20)),
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (_) => WasteDetail(

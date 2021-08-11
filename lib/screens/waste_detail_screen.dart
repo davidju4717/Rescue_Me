@@ -21,12 +21,11 @@ class WasteDetail extends StatelessWidget {
             children: [
               Text('${DateFormat('EEEE, d MMM, yyyy').format(post['submitted_date'].toDate())}',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
-              Text(post['uri'],
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30)),
+              Image.network(post['url']),
               Text('Items: ${post['wasted_items'].toString()}',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
               Text('Location(${post['latitude'].toString()},${post['longitude'].toString()})',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)), 
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)), 
             ]
           )
         )
