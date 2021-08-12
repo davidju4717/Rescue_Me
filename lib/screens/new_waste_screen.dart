@@ -94,7 +94,7 @@ class _NewWasteEntryState extends State<NewWasteEntry> {
             inputFormatters: <TextInputFormatter>[
               FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
             ],
-            autofocus: true,
+            // autofocus: true,
             decoration: InputDecoration(
                 labelText: "Number of Wasted Items",
                 border: OutlineInputBorder()),
