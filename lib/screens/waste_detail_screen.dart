@@ -3,7 +3,6 @@ import 'package:intl/intl.dart';
 
 
 class WasteDetail extends StatelessWidget {
-  static const routeName = '/waste_detail';
 
   late final post;
 

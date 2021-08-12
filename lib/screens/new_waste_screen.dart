@@ -6,9 +6,9 @@ import 'package:firebase_storage/firebase_storage.dart';
 import '../models/food_waste_post.dart';
 
 class NewWasteEntry extends StatefulWidget {
-  static const routeName = '/waste_entry';
   late final image;
-  NewWasteEntry({required this.image});
+
+  NewWasteEntry({Key? key, required this.image}) : super(key: key);
 
   @override
   _NewWasteEntryState createState() => _NewWasteEntryState();
@@ -89,34 +89,36 @@ class _NewWasteEntryState extends State<NewWasteEntry> {
 
   Widget wastedItemField() {
     return Semantics(
-      child: TextFormField(
-        keyboardType: TextInputType.numberWithOptions(),
-        inputFormatters: <TextInputFormatter>[
-          FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-        ],
-        autofocus: true,
-        decoration: InputDecoration(
-            labelText: "Number of Wasted Items", border: OutlineInputBorder()),
-        onSaved: (value) {
-          foodWastePost.wastedItems = int.parse(value!);
-        },
-        validator: (value) {
-          if (value!.isEmpty) {
-            return 'Please enter a number of wasted items';
-          } else {
-            return null;
-          }
-        }
-      ),
-      onTapHint: 'Introduce number of wasted items',
-      label: 'Introduce number of wasted items'
-    );
+        child: TextFormField(
+            keyboardType: TextInputType.numberWithOptions(),
+            inputFormatters: <TextInputFormatter>[
+              FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+            ],
+            autofocus: true,
+            decoration: InputDecoration(
+                labelText: "Number of Wasted Items",
+                border: OutlineInputBorder()),
+            onSaved: (value) {
+              foodWastePost.wastedItems = int.parse(value!);
+            },
+            validator: (value) {
+              if (value!.isEmpty) {
+                return 'Please enter a number of wasted items';
+              } else {
+                return null;
+              }
+            }),
+        onTapHint: 'Introduce number of wasted items',
+        label: 'Introduce number of wasted items');
   }
 
   Widget submitButton(BuildContext context) {
     return Semantics(
       child: ElevatedButton(
           child: const Icon(Icons.cloud_upload, size: 50),
+          onLongPress: () {
+            throw  Exception('Presseed too long!!');
+          },
           onPressed: () async {
             if (formKey.currentState!.validate()) {
               formKey.currentState!.save();
