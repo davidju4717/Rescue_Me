@@ -14,6 +14,8 @@ Rescue Me! is a mobile application developed with flutter SDK and written in Dar
 
 •	Integrates Sentry for crash reporting and Firebase Analytics for in-app analytics.
 
+![](Rescue_Me_example.gif)
+
 ## Getting Started
 
 
