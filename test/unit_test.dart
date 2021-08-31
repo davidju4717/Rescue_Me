@@ -1,20 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:test/test.dart';
-import 'package:wasteagram/models/food_waste_post.dart';
+import 'package:wasteagram/models/post.dart';
 
 void main() {
   test('check if all the getters return the appropiate values', () {
 
     // create a new post and insert values 
-    final post = FoodWastePost();
-    post.wastedItems = 3;
+    final post = AnimalPost();
+    post.count = 3;
     post.latitude = 50.0;
     post.longitude = -50.0;
     post.submittedDate = DateTime.parse('2020-01-01');
     post.url = 'hello';
 
     // implement all the getters
-    final wastedItems = post.getWastedItems;
+    final wastedItems = post.count;
     final latitude = post.getLatitude;
     final longitude = post.getLongitude;
     final url = post.getUrl;
@@ -31,7 +31,7 @@ void main() {
   test('check if getter getDateTimeStamp converts and returns the date in type Timestamp instead of DateTime',() {
     
     // a new post with a date
-    final post = FoodWastePost();
+    final post = AnimalPost();
     post.submittedDate = DateTime.parse('2020-01-01');
 
     // get the date of the post in timestamp format

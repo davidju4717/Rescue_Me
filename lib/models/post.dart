@@ -1,14 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class FoodWastePost {
+class AnimalPost {
   late String url;
   late double? latitude;
   late double? longitude;
   late DateTime submittedDate;
-  late int wastedItems;
+  late int count;
 
   String toString() {
-    return 'url: $url, latitude: $latitude, longitude: $longitude, submittedDate: $submittedDate, wastedItems: $wastedItems';
+    return 'url: $url, latitude: $latitude, longitude: $longitude, submittedDate: $submittedDate, count: $count';
   }
 
   // getters
@@ -17,5 +17,5 @@ class FoodWastePost {
   double? get getLongitude => longitude;
   DateTime get getDatetime => submittedDate;
   Timestamp get getDateTimeStamp => Timestamp.fromDate(submittedDate);
-  int get getWastedItems => wastedItems;
+  int get getCount => count;
 }

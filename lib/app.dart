@@ -4,7 +4,7 @@ import 'package:firebase_analytics/observer.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
-import 'screens/waste_list_screen.dart';
+import 'screens/post_list_screen.dart';
 
 class MyApp extends StatefulWidget {
   static Future<void> reportError(dynamic error, dynamic stackTrace) async {
@@ -35,9 +35,9 @@ class MyAppState extends State<MyApp> {
   void initThemeBrightneses() {
     setState(() {
       if (widget.preferences.getBool('isDark') == true) {
-        themeBrightness = ThemeBrightness(Brightness.dark, true);
+        themeBrightness = ThemeBrightness(true);
       } else {
-        themeBrightness = ThemeBrightness(Brightness.light, false);
+        themeBrightness = ThemeBrightness(false);
       }
     });
   }
@@ -64,11 +64,11 @@ class MyAppState extends State<MyApp> {
         primarySwatch: Colors.lightGreen,
         canvasColor:
             themeBrightness.isDark ? Colors.grey[850] : Colors.lightGreen[100],
-        brightness: themeBrightness.currentBrightness,
+        brightness: themeBrightness.isDark ? Brightness.dark: Brightness.light,
         fontFamily: 'DancingScript',
       ),
       navigatorObservers: <NavigatorObserver>[MyApp.observer],
-      home: WasteListScreen(
+      home: PostListScreen(
         analytics: MyApp.analytics,
       ),
     );
@@ -76,21 +76,17 @@ class MyAppState extends State<MyApp> {
 }
 
 class ThemeBrightness {
-  late Brightness brightness;
   bool dark;
 
-  ThemeBrightness(this.brightness, this.dark);
+  ThemeBrightness(this.dark);
 
-  Brightness get currentBrightness => brightness;
   bool get isDark => dark;
 
   void changeLightBrightness() {
-    brightness = Brightness.light;
     dark = false;
   }
 
   void changeDarkBrightness() {
-    brightness = Brightness.dark;
     dark = true;
   }
 }

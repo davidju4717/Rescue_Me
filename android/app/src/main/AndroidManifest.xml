@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="edu.oregonstate.u934322818.wasteagram">
    <application
-        android:label="wasteagram"
+        android:label="Rescue Me!"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

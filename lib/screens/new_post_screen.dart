@@ -3,20 +3,20 @@ import 'package:flutter/services.dart';
 import 'package:location/location.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import '../models/food_waste_post.dart';
+import '../models/post.dart';
 
-class NewWasteEntry extends StatefulWidget {
+class NewPostEntry extends StatefulWidget {
   late final image;
 
-  NewWasteEntry({Key? key, required this.image}) : super(key: key);
+  NewPostEntry({Key? key, required this.image}) : super(key: key);
 
   @override
-  _NewWasteEntryState createState() => _NewWasteEntryState();
+  _NewPostEntryState createState() => _NewPostEntryState();
 }
 
-class _NewWasteEntryState extends State<NewWasteEntry> {
+class _NewPostEntryState extends State<NewPostEntry> {
   final formKey = GlobalKey<FormState>();
-  final foodWastePost = FoodWastePost();
+  final animalPost = AnimalPost();
   LocationData? locationData;
   var locationService = Location();
 
@@ -106,7 +106,7 @@ class _NewWasteEntryState extends State<NewWasteEntry> {
                 labelStyle: TextStyle(fontSize: 30),
                 border: OutlineInputBorder()),
             onSaved: (value) {
-              foodWastePost.wastedItems = int.parse(value!);
+              animalPost.count = int.parse(value!);
             },
             validator: (value) {
               if (value!.isEmpty) {
@@ -132,21 +132,21 @@ class _NewWasteEntryState extends State<NewWasteEntry> {
 
               // get date, latitude and longitude
               DateTime date = DateTime.now();
-              foodWastePost.submittedDate = date;
-              foodWastePost.latitude = locationData!.latitude;
-              foodWastePost.longitude = locationData!.longitude;
+              animalPost.submittedDate = date;
+              animalPost.latitude = locationData!.latitude;
+              animalPost.longitude = locationData!.longitude;
 
               // get url of the image
               final url = await getImageUrl();
-              foodWastePost.url = url;
+              animalPost.url = url;
 
               // upload data to firebasee
               FirebaseFirestore.instance.collection('posts').add({
-                'date': foodWastePost.getDateTimeStamp,
-                'latitude': foodWastePost.getLatitude,
-                'longitude': foodWastePost.getLongitude,
-                'quantity': foodWastePost.getWastedItems,
-                'imageURL': foodWastePost.getUrl
+                'date': animalPost.getDateTimeStamp,
+                'latitude': animalPost.getLatitude,
+                'longitude': animalPost.getLongitude,
+                'quantity': animalPost.getCount,
+                'imageURL': animalPost.getUrl
               });
               Navigator.of(context).pop();
             }
