@@ -1,6 +1,6 @@
 # Rescue Me!
 
-Rescue Me! is a mobile application developed with flutter SDK and written in Dart that allows an animal rescue organization to locate abandoned kittens and puppies in a city. Users of this application can help the organization with its mission by posting a photo and the count of the fluffy creatues when encountering them. The  user's device geolocation will also be stored in the post upon submission.   
+Rescue Me! is a mobile application developed with flutter SDK and written in Dart that allows an animal rescue organization to locate abandoned kittens and puppies in a city. Users of this application can help the organization with its mission by posting a photo and the count of the fluffy creatures when encountering them. The  user's device geolocation will also be stored in the post upon submission.   
 
 ## Key Features
 
