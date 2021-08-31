@@ -1,16 +1,12 @@
 # Rescue Me!
 
-A new Flutter project.
+This is a flutter application written in Dart that supports both iOS and Android. 
+
+## Key Features
+•	Enables access to hardware services such as location of the device and image gallery allowing users to post images and locations of abandoned kittens and puppies for rescue 
+•	Achieves data persistence through Google Firebase Storage and Firestone database for remote storage and through SharedPreferences API for on-device storage. Stored data includes the details of every post (image, location, count) and whether the dark mode is enabled on the device. 
+•	Integrates Sentry for crash reporting and Firebase Analytics for in-app analytics
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
