@@ -58,7 +58,12 @@ class _NewWasteEntryState extends State<NewWasteEntry> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('New Post'),
+          title: Text(' New Post',
+          style: TextStyle(
+            fontSize: 25, 
+            fontWeight: FontWeight.bold
+            )
+          ),
         ),
         body: Padding(
             padding: const EdgeInsets.all(20),
@@ -68,9 +73,10 @@ class _NewWasteEntryState extends State<NewWasteEntry> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Flexible(
-                      flex: 5,
-                      child: Image.file(widget.image!),
-                    ),
+                        flex: 5,
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15.0),
+                            child: Image.file(widget.image!))),
                     SizedBox(height: 20),
                     Flexible(
                       flex: 1,
@@ -96,14 +102,15 @@ class _NewWasteEntryState extends State<NewWasteEntry> {
             ],
             // autofocus: true,
             decoration: InputDecoration(
-                labelText: "Number of Wasted Items",
+                labelText: "Count",
+                labelStyle: TextStyle(fontSize: 30),
                 border: OutlineInputBorder()),
             onSaved: (value) {
               foodWastePost.wastedItems = int.parse(value!);
             },
             validator: (value) {
               if (value!.isEmpty) {
-                return 'Please enter a number of wasted items';
+                return 'Please enter a number';
               } else {
                 return null;
               }
@@ -117,7 +124,7 @@ class _NewWasteEntryState extends State<NewWasteEntry> {
       child: ElevatedButton(
           child: const Icon(Icons.cloud_upload, size: 50),
           onLongPress: () {
-            throw  Exception('Presseed too long!!');
+            throw Exception('Presseed too long!!');
           },
           onPressed: () async {
             if (formKey.currentState!.validate()) {

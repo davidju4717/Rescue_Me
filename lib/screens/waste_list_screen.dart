@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
 import '../widgets/waste_list.dart';
+import '../widgets/drawer.dart';
 import '../screens/new_waste_screen.dart';
 
 class WasteListScreen extends StatefulWidget {
-
   late final analytics;
 
   WasteListScreen({Key? key, required this.analytics}) : super(key: key);
@@ -28,38 +28,29 @@ class _WasteListScreenState extends State<WasteListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
-        stream: FirebaseFirestore.instance
-            .collection('posts')
-            .orderBy('date', descending: true)
-            .snapshots(),
-        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          if (snapshot.hasData &&
-              snapshot.data!.docs != null &&
-              snapshot.data!.docs.length > 0) {
-            sum = 0;
-            for (var index = 0; index < snapshot.data!.docs.length; index++) {
-              var post = snapshot.data!.docs[index];
-              sum += post['quantity'];
-            }
-            return listScaffold(
-                context: context,
-                sum: sum,
-                body: WasteList(snapshot: snapshot));
-          } else {
-            return listScaffold(
-                context: context,
-                sum: sum,
-                body: Center(child: CircularProgressIndicator()));
-          }
-        });
-  }
-
-  Widget listScaffold(
-      {required BuildContext context, required num sum, required Widget body}) {
     return Scaffold(
-        appBar: AppBar(title: Text('Wasteagram-$sum')),
-        body: body,
+        appBar: AppBar(
+            title: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Icon(Icons.pets),
+          Text(' Rescue Me!',
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+        ])),
+        endDrawer: drawer(),
+        body: StreamBuilder(
+            stream: FirebaseFirestore.instance
+                .collection('posts')
+                .orderBy('date', descending: true)
+                .snapshots(),
+            builder:
+                (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              if (snapshot.hasData &&
+                  snapshot.data!.docs != null &&
+                  snapshot.data!.docs.length > 0) {
+                return WasteList(snapshot: snapshot);
+              } else {
+                return Center(child: const Icon(Icons.pets));
+              }
+            }),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: Semantics(
             child: FloatingActionButton(

@@ -17,9 +17,9 @@ class WasteList extends StatelessWidget {
             child: ListTile(
                 title: Text(
                     '${DateFormat('EEEE, d MMM, yyyy').format(post['date'].toDate())}',
-                    style: TextStyle(fontSize: 20)),
+                    style: TextStyle(fontSize: 25)),
                 trailing: Text(post['quantity'].toString(),
-                    style: TextStyle(fontSize: 20)),
+                    style: TextStyle(fontSize: 25)),
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (_) => WasteDetail(
