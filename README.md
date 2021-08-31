@@ -4,11 +4,13 @@ Rescue Me! is a mobile application developed with flutter SDK and written in Dar
 
 ## Key Features
 
-• supports both iOS and Android.
+• Supports both iOS and Android.
 
-•	Enables access to hardware services such as location of the device and image gallery allowing users to post images and locations of abandoned kittens and puppies for rescue.
+•	Enables access to hardware services such as geolocation and the image gallery of the device.
 
-•	Achieves data persistence through Google Firebase Storage and Firestone database for remote storage and through SharedPreferences API for on-device storage. Stored data includes the details of every post (image, location, count) and whether the dark mode is enabled on the device. 
+•	Achieves remote data persistence by Storing photos on Google's Firestore Storage and relavant data (location, count and photo URL) in Google's Firestore Database.
+
+•	Achieves on device data persistence (whether the dark mode is enabled) through SharedPreferences API.
 
 •	Integrates Sentry for crash reporting and Firebase Analytics for in-app analytics.
 
