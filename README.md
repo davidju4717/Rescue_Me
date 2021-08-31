@@ -10,7 +10,7 @@ Rescue Me! is a mobile application developed with flutter SDK and written in Dar
 
 •	Achieves remote data persistence by Storing photos on Google's Firestore Storage and relavant data (location, count and photo URL) in Google's Firestore Database.
 
-•	Achieves on device data persistence (whether the dark mode is enabled) through SharedPreferences API.
+•	Achieves on device data persistence (eg. whether the dark mode is enabled) through SharedPreferences API.
 
 •	Integrates Sentry for crash reporting and Firebase Analytics for in-app analytics.
 
