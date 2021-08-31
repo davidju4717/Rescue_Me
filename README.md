@@ -14,7 +14,17 @@ Rescue Me! is a mobile application developed with flutter SDK and written in Dar
 
 •	Integrates Sentry for crash reporting and Firebase Analytics for in-ap
 
-![](Rescue_Me_example.gif)
+
+Solution:
+
+Instead of using markdown, I used <img> tag. Here is my code:
+
+<p align="center">
+  <img src="Rescue_Me_example.gif" alt="animated" />
+</p>
+
+<!-- 
+![](Rescue_Me_example.gif) -->
 
 ## Getting Started
 
