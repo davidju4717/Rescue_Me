@@ -4,7 +4,7 @@ Rescue Me! is a mobile application developed with flutter SDK and written in Dar
 
 ## Key Features
 
-• Supports both iOS and Android.
+• Supports both iOS and Android.</br>
 •	Enables access to hardware services such as geolocation and the image gallery of the device.
 •	Achieves remote data persistence by Storing photos on Google's Firestore Storage and relavant data (location, count and photo URL) in Google's Firestore Database.
 •	Achieves on device data persistence (eg. whether the dark mode is enabled) through SharedPreferences API.
