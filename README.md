@@ -15,7 +15,6 @@ Rescue Me! is a mobile application developed with flutter SDK and written in Dar
   <img src="Rescue_Me_example.gif" alt="animated" />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <img src="data_persistence.gif" alt="animated" />
 </div>
 
