@@ -10,13 +10,10 @@ Rescue Me! is a mobile application developed with flutter SDK and written in Dar
 •	Achieves on device data persistence (eg. whether the dark mode is enabled) through SharedPreferences API.</br>
 •	Integrates Sentry for crash reporting and Firebase Analytics for in-ap analytics.</br>
 
-<p align="center">
-  <div>
-    Example </br>
+<div align="center">
     <img src="Rescue_Me_example.gif" alt="animated" />
-  </div> 
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <img src="data_persistence.gif" alt="animated" />
-</p>
+</div>
 
 
